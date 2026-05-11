@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# borders config — colored outline around the focused window.
+# Color format: 0xAARRGGBB (alpha, red, green, blue).
+
+options=(
+    style=round
+    width=4.0
+    hidpi=on
+    active_color=0xffffe066   # gentleman yellow #FFE066
+    inactive_color=0x00000000 # transparent on unfocused windows
+)
+
+borders "${options[@]}"

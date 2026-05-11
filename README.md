@@ -1,0 +1,127 @@
+# TomyQB.dots
+
+Personal development environment for macOS. One command installs the shell stack
+(fish + starship + atuin), the terminal (Ghostty), the tiling window manager
+(AeroSpace) with custom keybindings, and everything in between.
+
+## Install on a new Mac
+
+```bash
+brew install TomyQB/tap/tomyqb-dots
+tomyqb-dots install
+```
+
+That's it. The installer:
+
+1. `brew bundle`s every package in `Brewfile`
+2. Backs up any existing configs to `~/.tomyqb-backup-<timestamp>/`
+3. Drops the dotfiles in place
+4. Bootstraps fisher (fish plugins) and tpm (tmux plugins)
+5. Sets fish as the default shell
+6. Starts `borders` and AeroSpace as background services
+
+It's idempotent — re-run it any time.
+
+## What's included
+
+| Tool       | Purpose                          | Config location                       |
+|------------|----------------------------------|---------------------------------------|
+| fish       | Shell                            | `~/.config/fish/config.fish`          |
+| starship   | Prompt (Gentleman palette)       | `~/.config/starship.toml`             |
+| atuin      | Shell history                    | (initialised on first run)            |
+| carapace   | Completions bridge               | (autoinit from fish config)           |
+| tmux       | Terminal multiplexer + kanagawa  | `~/.tmux.conf`                        |
+| Ghostty    | Terminal emulator                | `~/.config/ghostty/config`            |
+| AeroSpace  | Tiling window manager            | `~/.aerospace.toml`                   |
+| borders    | Focused-window outline           | `~/.config/borders/bordersrc`         |
+| lazygit    | Git TUI                          | —                                     |
+| lazydocker | Docker TUI                       | —                                     |
+
+## Keybindings cheat sheet
+
+### AeroSpace (window manager)
+
+| Key                       | Action                                              |
+|---------------------------|-----------------------------------------------------|
+| `alt + shift + ←/↓/↑/→`   | Focus window                                        |
+| `alt + ctrl + ←/↓/↑/→`    | Move window                                         |
+| `alt + 1..0`              | Go to workspace 1..10                               |
+| `alt + shift + 1..0`      | Move window to workspace 1..10                      |
+| `alt + tab`               | Back-and-forth between last two workspaces          |
+| `alt + enter`             | Toggle accordion ↔ tiles layout                     |
+| `alt + slash`             | Toggle tiles orientation                            |
+| `alt + shift + m`         | Fullscreen current window                           |
+| `alt + w`                 | Close window (and quit app if it was the last)      |
+| `alt + minus` / `alt + =` | Resize                                              |
+| `alt + f`                 | Open Finder (floating) at terminal's CWD            |
+| `alt + c`                 | Open VSCode at terminal's CWD                       |
+| `alt + q`                 | Open new Ghostty window                             |
+| `alt + b`                 | Open new Chrome window                              |
+| `alt + d`                 | Toggle lazydocker in workspace D                    |
+| `alt + shift + ;`         | Enter service mode (esc=reload, r=reset, f=float)   |
+
+### Ghostty (terminal)
+
+| Key                       | Action                          |
+|---------------------------|---------------------------------|
+| `alt + v`                 | Split right                     |
+| `alt + h`                 | Split down                      |
+| `alt + ←/↓/↑/→`           | Move focus between splits       |
+| `alt + z`                 | Toggle zoom on current split    |
+| `alt + s`                 | Close current split             |
+| `cmd + k`                 | Clear screen                    |
+| `alt + shift + s`         | Write screen to temp file       |
+
+### tmux
+
+Prefix: `ctrl + a` (not `ctrl + b`)
+
+| Key                       | Action                          |
+|---------------------------|---------------------------------|
+| `prefix + v`              | Split pane right                |
+| `prefix + d`              | Split pane down                 |
+| `alt + g`                 | Toggle floating scratch session |
+| `prefix + K`              | Kill all other sessions         |
+
+## Updating
+
+```bash
+brew upgrade tomyqb-dots
+tomyqb-dots install
+```
+
+Or, if you cloned the repo:
+
+```bash
+tomyqb-dots update
+```
+
+## Undoing
+
+```bash
+tomyqb-dots uninstall
+```
+
+Restores the latest backup snapshot to `~/`. Doesn't remove the brew packages
+(use `brew bundle cleanup --file=Brewfile --force` for that).
+
+## Repo layout
+
+```
+tomyqb-dots/
+├── bin/tomyqb-dots          # CLI entry point
+├── lib/install.sh           # main installer
+├── Brewfile                 # dependencies (used by `brew bundle`)
+├── config/                  # source of truth for all dotfiles
+│   ├── aerospace/
+│   ├── ghostty/
+│   ├── starship/
+│   ├── fish/
+│   ├── tmux/
+│   └── borders/
+└── Formula/tomyqb-dots.rb   # local copy; canonical lives in TomyQB/homebrew-tap
+```
+
+## License
+
+MIT
