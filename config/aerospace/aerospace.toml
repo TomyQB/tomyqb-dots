@@ -39,7 +39,7 @@ alt-w = 'close --quit-if-last-window'
 alt-f = 'exec-and-forget $HOME/.config/aerospace/open-at-cwd.sh finder'
 alt-c = 'exec-and-forget $HOME/.config/aerospace/open-at-cwd.sh vscode'
 alt-q = 'exec-and-forget open -na Ghostty'
-alt-b = '''exec-and-forget osascript -e 'tell application "Google Chrome" to make new window' -e 'tell application "Google Chrome" to activate' '''
+alt-b = 'exec-and-forget $HOME/.config/aerospace/open-chrome.sh'
 alt-d = 'exec-and-forget $HOME/.config/aerospace/toggle-lazydocker.sh'
 
 # --- Focus window (alt+shift+arrows) ---

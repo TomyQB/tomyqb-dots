@@ -54,6 +54,7 @@ install_configs() {
   backup_then_install "$CONFIG_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
   mkdir -p "$HOME/.config/aerospace"
   backup_then_install "$CONFIG_DIR/aerospace/open-at-cwd.sh"          "$HOME/.config/aerospace/open-at-cwd.sh"
+  backup_then_install "$CONFIG_DIR/aerospace/open-chrome.sh"          "$HOME/.config/aerospace/open-chrome.sh"
   backup_then_install "$CONFIG_DIR/aerospace/toggle-lazydocker.sh"    "$HOME/.config/aerospace/toggle-lazydocker.sh"
   chmod +x "$HOME/.config/aerospace/"*.sh
 
