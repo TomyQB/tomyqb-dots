@@ -34,17 +34,20 @@ if [ -n "$app_pid" ] && is_terminal "$app_name"; then
 
   # 1) Prefer tmux: shells live under the tmux server (daemon), not under the
   # terminal app, so walking descendants would miss them. Match the tmux
-  # client process (descendant of the terminal) to its session and ask tmux
-  # for the focused pane's CWD.
+  # client process (descendant of the terminal) and ask tmux — from THAT
+  # client's perspective — for the focused pane's CWD. Using `-c <client>`
+  # (instead of `-t <session>:`) is what makes #{pane_current_path} resolve
+  # to the pane the user is actually looking at: with multiple panes/splits,
+  # each tmux client has its own active pane.
   if command -v tmux >/dev/null 2>&1 && tmux info >/dev/null 2>&1; then
     while read -r d; do
       [ -z "$d" ] && continue
       name=$(ps -o comm= -p "$d" 2>/dev/null | awk -F/ '{print $NF}')
       if [ "$name" = "tmux" ]; then
-        sess=$(tmux list-clients -F '#{client_pid} #{client_session}' 2>/dev/null \
-               | awk -v p="$d" '$1==p{print $2; exit}')
-        if [ -n "$sess" ]; then
-          path=$(tmux display-message -t "$sess:" -p '#{pane_current_path}' 2>/dev/null)
+        client=$(tmux list-clients -F '#{client_pid} #{client_name}' 2>/dev/null \
+                 | awk -v p="$d" '$1==p{print $2; exit}')
+        if [ -n "$client" ]; then
+          path=$(tmux display-message -c "$client" -p '#{pane_current_path}' 2>/dev/null)
           if [ -n "$path" ] && [ -d "$path" ]; then
             target="$path"
             break
