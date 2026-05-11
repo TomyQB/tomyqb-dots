@@ -2,9 +2,7 @@ class TomyqbDots < Formula
   desc "Personal dotfiles installer for TomyQB development environment"
   homepage "https://github.com/TomyQB/tomyqb-dots"
   url "https://github.com/TomyQB/tomyqb-dots/archive/refs/tags/v0.1.0.tar.gz"
-  # Replace with the real sha256 after tagging v0.1.0:
-  #   shasum -a 256 v0.1.0.tar.gz
-  sha256 "REPLACE_ME_AFTER_FIRST_RELEASE"
+  sha256 "adfbd3df2095cc546c797e494a5c6352677c0b0286c3757a0d695be88ec078fa"
   license "MIT"
   head "https://github.com/TomyQB/tomyqb-dots.git", branch: "main"
 
