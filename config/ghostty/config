@@ -52,6 +52,17 @@ confirm-close-surface = false
 # hide that info behind a single PID and break the lookup).
 keybind = alt+s=close_surface
 
+# Pass alt+arrows through as standard CSI alt+arrow sequences. Ghostty's
+# defaults map alt+left/right to esc:b/esc:f (shell word-jump), which would
+# eat the keys before tmux sees them — breaking pane navigation. With these
+# overrides tmux recognizes M-Left/M-Right/M-Up/M-Down inside a session;
+# outside tmux fish still maps the same CSI sequences to word-jump, so the
+# shell behavior is preserved.
+keybind = alt+arrow_left=csi:1;3D
+keybind = alt+arrow_right=csi:1;3C
+keybind = alt+arrow_up=csi:1;3A
+keybind = alt+arrow_down=csi:1;3B
+
 # Miscellaneous
 keybind = cmd+k=clear_screen
 keybind = shift+enter=text:\x1b\r
