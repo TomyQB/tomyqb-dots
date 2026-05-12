@@ -47,10 +47,9 @@ macos-option-as-alt = left
 # No pedir confirmación al cerrar splits/ventanas (cierra silenciosamente)
 confirm-close-surface = false
 
-# Surface lifecycle (no splits — splits live in tmux so alt+f/alt+c from
-# AeroSpace can resolve the focused pane's CWD; Ghostty native splits would
-# hide that info behind a single PID and break the lookup).
-keybind = alt+s=close_surface
+# Splits live in tmux (alt+v / alt+h create splits, alt+s kills the active
+# pane). Ghostty must not intercept alt+s — it used to map to close_surface
+# which killed the whole terminal instead of just the focused split.
 
 # Pass alt+arrows through as standard CSI alt+arrow sequences. Ghostty's
 # defaults map alt+left/right to esc:b/esc:f (shell word-jump), which would
