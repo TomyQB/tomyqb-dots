@@ -51,12 +51,17 @@ install_configs() {
   log "Installing configs (backup -> $BACKUP_DIR)"
 
   # AeroSpace
-  backup_then_install "$CONFIG_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
   mkdir -p "$HOME/.config/aerospace"
-  backup_then_install "$CONFIG_DIR/aerospace/open-at-cwd.sh"          "$HOME/.config/aerospace/open-at-cwd.sh"
-  backup_then_install "$CONFIG_DIR/aerospace/open-chrome.sh"          "$HOME/.config/aerospace/open-chrome.sh"
-  backup_then_install "$CONFIG_DIR/aerospace/toggle-lazydocker.sh"    "$HOME/.config/aerospace/toggle-lazydocker.sh"
+  backup_then_install "$CONFIG_DIR/aerospace/aerospace.toml"           "$HOME/.config/aerospace/aerospace.toml"
+  backup_then_install "$CONFIG_DIR/aerospace/open-at-cwd.sh"           "$HOME/.config/aerospace/open-at-cwd.sh"
+  backup_then_install "$CONFIG_DIR/aerospace/open-chrome.sh"           "$HOME/.config/aerospace/open-chrome.sh"
+  backup_then_install "$CONFIG_DIR/aerospace/toggle-lazydocker.sh"     "$HOME/.config/aerospace/toggle-lazydocker.sh"
+  backup_then_install "$CONFIG_DIR/aerospace/focus-workspace-here.sh"  "$HOME/.config/aerospace/focus-workspace-here.sh"
   chmod +x "$HOME/.config/aerospace/"*.sh
+  # Remove legacy single-file config so AeroSpace does not see two configs.
+  if [ -f "$HOME/.aerospace.toml" ]; then
+    rm -f "$HOME/.aerospace.toml"
+  fi
 
   # Ghostty
   mkdir -p "$HOME/.config/ghostty/shaders"
