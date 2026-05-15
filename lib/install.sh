@@ -32,13 +32,64 @@ backup_then_install() {
   cp -R "$src" "$dest"
 }
 
+# --- Prompts ---
+# Honors TOMYQB_DOTS_YES=1 for non-interactive runs (CI, scripted setup).
+confirm() {
+  local prompt="$1"
+  if [ "${TOMYQB_DOTS_YES:-0}" = "1" ]; then
+    return 0
+  fi
+  if [ ! -t 0 ]; then
+    # No TTY available and not auto-confirmed: refuse to guess.
+    return 1
+  fi
+  local reply
+  read -r -p "$prompt [y/N] " reply
+  [[ "$reply" =~ ^[Yy]$ ]]
+}
+
 # --- Steps ---
 
-ensure_brew() {
-  if ! command -v brew >/dev/null 2>&1; then
-    err "Homebrew not found. Install it first: https://brew.sh"
+ensure_xcode_clt() {
+  if xcode-select -p >/dev/null 2>&1; then
+    return
+  fi
+  log "Xcode Command Line Tools not found"
+  if ! confirm "Install them now? (opens a system dialog and waits until it finishes)"; then
+    err "Xcode CLT are required (git, compilers). Aborting."
     exit 1
   fi
+  xcode-select --install >/dev/null 2>&1 || true
+  log "Waiting for Xcode CLT installation to finish..."
+  # The GUI installer runs out-of-band; poll until xcode-select -p succeeds.
+  until xcode-select -p >/dev/null 2>&1; do
+    sleep 10
+  done
+  ok "Xcode Command Line Tools installed"
+}
+
+ensure_brew() {
+  if command -v brew >/dev/null 2>&1; then
+    return
+  fi
+  log "Homebrew not found"
+  if ! confirm "Install Homebrew now? (runs the official installer from brew.sh)"; then
+    err "Homebrew is required. Aborting."
+    exit 1
+  fi
+  NONINTERACTIVE=1 /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # Make `brew` resolvable in the current shell session.
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+  if ! command -v brew >/dev/null 2>&1; then
+    err "Homebrew install completed but \`brew\` is still not on PATH. Aborting."
+    exit 1
+  fi
+  ok "Homebrew installed"
 }
 
 install_brew_packages() {
@@ -104,6 +155,24 @@ bootstrap_fish_plugins() {
   ok "Fish plugins synced"
 }
 
+bootstrap_playwright() {
+  log "Bootstrapping Playwright (global @playwright/test + browsers)..."
+  if ! command -v npm >/dev/null 2>&1; then
+    warn "npm not found — skipping Playwright. Re-run after \`brew install node\`."
+    return
+  fi
+  if ! npm list -g --depth=0 @playwright/test >/dev/null 2>&1; then
+    npm install -g @playwright/test >/dev/null 2>&1 || warn "npm install -g @playwright/test failed"
+  fi
+  if command -v playwright >/dev/null 2>&1; then
+    # Installs the browser binaries (chromium, firefox, webkit) Playwright drives.
+    playwright install >/dev/null 2>&1 || warn "playwright install (browsers) had issues"
+    ok "Playwright ready"
+  else
+    warn "playwright CLI still not on PATH after npm install"
+  fi
+}
+
 bootstrap_tmux_plugins() {
   log "Bootstrapping tmux plugin manager (tpm) + plugins..."
   if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
@@ -129,6 +198,36 @@ set_fish_default_shell() {
     chsh -s "$fish_path" || warn "chsh failed — run manually: chsh -s $fish_path"
   fi
   ok "Default shell: $fish_path"
+}
+
+verify_installation() {
+  log "Verifying required tools are available..."
+  # CLI binaries we expect on PATH after `brew bundle`.
+  local cli_tools=(fish starship atuin tmux gh jq lazygit lazydocker fzf zoxide borders aerospace aws node npm)
+  local missing=()
+  local tool
+  for tool in "${cli_tools[@]}"; do
+    command -v "$tool" >/dev/null 2>&1 || missing+=("$tool")
+  done
+  # GUI casks live under /Applications and won't show on PATH.
+  local apps=(
+    "Ghostty:/Applications/Ghostty.app"
+    "Maccy:/Applications/Maccy.app"
+    "Google Chrome:/Applications/Google Chrome.app"
+    "Visual Studio Code:/Applications/Visual Studio Code.app"
+  )
+  local entry name path
+  for entry in "${apps[@]}"; do
+    name="${entry%%:*}"
+    path="${entry#*:}"
+    [ -d "$path" ] || missing+=("$name")
+  done
+  if [ "${#missing[@]}" -gt 0 ]; then
+    warn "Missing after brew bundle: ${missing[*]}"
+    warn "Re-run \`brew bundle --file=$BREWFILE\` or install them manually."
+    return 1
+  fi
+  ok "All required tools present"
 }
 
 start_services() {
@@ -157,11 +256,14 @@ EOF
 # --- Entry point ---
 
 main() {
+  ensure_xcode_clt
   ensure_brew
   install_brew_packages
+  verify_installation || warn "Continuing despite missing tools — fix and re-run if needed."
   install_configs
   bootstrap_fish_plugins
   bootstrap_tmux_plugins
+  bootstrap_playwright
   set_fish_default_shell
   start_services
   print_done
