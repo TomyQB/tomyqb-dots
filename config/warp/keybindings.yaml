@@ -1,0 +1,16 @@
+---
+"requested_command:edit": none
+"pane_group:add_right": alt-v
+"terminal:clear_blocks": none
+"workspace:activate_next_tab": alt-k
+"workspace:close_panel": cmd-w
+Close Workflow: cmd-w
+"workspace:toggle_left_panel": alt-u
+"workspace:activate_prev_tab": alt-i
+"ai_assistant_panel:reset_context": none
+"workspace:toggle_project_explorer": alt-u
+"code_diff_view:edit_requested_edit": none
+"workspace:close_active_tab": alt-b
+"editor:edit_link": none
+"workspace:new_tab": alt-n
+"pane_group:add_down": alt-h

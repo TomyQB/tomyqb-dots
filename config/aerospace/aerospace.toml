@@ -37,17 +37,16 @@ alt-w = 'close --quit-if-last-window'
 
 # --- App launchers (open-at-cwd opens at the focused terminal's CWD) ---
 alt-f = 'exec-and-forget $HOME/.config/aerospace/open-at-cwd.sh finder'
-alt-c = 'exec-and-forget $HOME/.config/aerospace/open-at-cwd.sh vscode'
-alt-q = 'exec-and-forget open -na Ghostty'
-alt-b = 'exec-and-forget $HOME/.config/aerospace/open-chrome.sh'
+alt-q = 'exec-and-forget open -na Warp'
+alt-g = 'exec-and-forget $HOME/.config/aerospace/open-chrome.sh'
 alt-d = 'exec-and-forget $HOME/.config/aerospace/toggle-lazydocker.sh'
 
-# --- Focus window (alt+shift+arrows) ---
-# alt+arrows queda libre para que Ghostty navegue entre splits
-alt-shift-left  = 'focus left'
+# --- Focus window (alt+shift+hjkl horizontal, arrows vertical) ---
+# alt+arrows queda libre para que Warp navegue entre splits
+alt-shift-j     = 'focus left'
 alt-shift-down  = 'focus down'
 alt-shift-up    = 'focus up'
-alt-shift-right = 'focus right'
+alt-shift-l     = 'focus right'
 
 # --- Move window (alt+ctrl+arrows) ---
 alt-ctrl-left  = 'move left'

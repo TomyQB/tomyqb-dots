@@ -1,0 +1,9 @@
+---
+name: lazydocker
+windows:
+  - tabs:
+      - title: lazydocker
+        layout:
+          cwd: ~
+          commands:
+            - exec: lazydocker

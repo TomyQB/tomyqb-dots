@@ -3,7 +3,7 @@
 # - If lazydocker is already running, or workspace D already has any window,
 #   just focus workspace D — never spawn a duplicate.
 # - Otherwise, switch to D first (so the new window lands there) and launch
-#   Ghostty with lazydocker as its command.
+#   Warp with the lazydocker launch configuration.
 set -u
 
 is_open() {
@@ -12,7 +12,7 @@ is_open() {
     return 0
   fi
   # Fallback: a window already exists in workspace D. Covers the edge case
-  # where Ghostty has launched but lazydocker hasn't started yet, or pgrep
+  # where Warp has launched but lazydocker hasn't started yet, or pgrep
   # misses the process for whatever reason.
   if aerospace list-windows --workspace D 2>/dev/null | grep -q .; then
     return 0
@@ -24,5 +24,5 @@ if is_open; then
   aerospace workspace D
 else
   aerospace workspace D
-  open -na Ghostty --args --command=lazydocker
+  open "warp://launch/lazydocker"
 fi

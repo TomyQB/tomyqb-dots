@@ -38,8 +38,9 @@ if test $IS_TERMUX -eq 0; and set -q BREW_BIN; and test -f $BREW_BIN
     eval ($BREW_BIN shellenv)
 end
 
-# Start tmux/zellij
-if not set -q TMUX
+# Start tmux/zellij — skip inside Warp (Warp has native tabs/panes and its
+# shell integration breaks if the real shell ends up inside tmux).
+if not set -q TMUX; and test "$TERM_PROGRAM" != WarpTerminal
     tmux
 end
 
@@ -79,6 +80,9 @@ set -g fish_greeting ""
 # Default editor (VSCode, --wait blocks until file is closed)
 set -gx EDITOR 'code -w'
 set -gx VISUAL 'code -w'
+
+# Claude Code: enable fullscreen TUI (mouse selection + sticky input bar)
+set -gx CLAUDE_CODE_NO_FLICKER 1
 
 ## alias
 if test (uname) = Darwin
@@ -122,4 +126,3 @@ set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
-clear

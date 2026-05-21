@@ -1,7 +1,7 @@
 # TomyQB.dots
 
 Personal development environment for macOS. One command installs the shell stack
-(fish + starship + atuin), the terminal (Ghostty), the tiling window manager
+(fish + starship + atuin), the terminal (Warp), the tiling window manager
 (AeroSpace) with custom keybindings, and everything in between.
 
 ## Install on a new Mac
@@ -31,8 +31,8 @@ It's idempotent — re-run it any time.
 | atuin      | Shell history                    | (initialised on first run)            |
 | carapace   | Completions bridge               | (autoinit from fish config)           |
 | tmux       | Terminal multiplexer + kanagawa  | `~/.tmux.conf`                        |
-| Ghostty    | Terminal emulator                | `~/.config/ghostty/config`            |
-| AeroSpace  | Tiling window manager            | `~/.aerospace.toml`                   |
+| Warp       | Terminal emulator                | `~/.warp/`                            |
+| AeroSpace  | Tiling window manager            | `~/.config/aerospace/aerospace.toml`  |
 | borders    | Focused-window outline           | `~/.config/borders/bordersrc`         |
 | lazygit    | Git TUI                          | —                                     |
 | lazydocker | Docker TUI                       | —                                     |
@@ -43,7 +43,8 @@ It's idempotent — re-run it any time.
 
 | Key                       | Action                                              |
 |---------------------------|-----------------------------------------------------|
-| `alt + shift + ←/↓/↑/→`   | Focus window                                        |
+| `alt + shift + j/l`       | Focus window (left/right)                           |
+| `alt + shift + ↓/↑`       | Focus window (down/up)                              |
 | `alt + ctrl + ←/↓/↑/→`    | Move window                                         |
 | `alt + 1..0`              | Go to workspace 1..10                               |
 | `alt + shift + 1..0`      | Move window to workspace 1..10                      |
@@ -54,23 +55,22 @@ It's idempotent — re-run it any time.
 | `alt + w`                 | Close window (and quit app if it was the last)      |
 | `alt + minus` / `alt + =` | Resize                                              |
 | `alt + f`                 | Open Finder (floating) at terminal's CWD            |
-| `alt + c`                 | Open VSCode at terminal's CWD                       |
-| `alt + q`                 | Open new Ghostty window                             |
-| `alt + b`                 | Open new Chrome window                              |
-| `alt + d`                 | Toggle lazydocker in workspace D                    |
+| `alt + q`                 | Open new Warp window                                |
+| `alt + g`                 | Open new Chrome window                              |
+| `alt + d`                 | Toggle lazydocker in workspace D (Warp launch cfg)  |
 | `alt + shift + ;`         | Enter service mode (esc=reload, r=reset, f=float)   |
 
-### Ghostty (terminal)
+### Warp (terminal)
 
-| Key                       | Action                          |
-|---------------------------|---------------------------------|
-| `alt + v`                 | Split right                     |
-| `alt + h`                 | Split down                      |
-| `alt + ←/↓/↑/→`           | Move focus between splits       |
-| `alt + z`                 | Toggle zoom on current split    |
-| `alt + s`                 | Close current split             |
-| `cmd + k`                 | Clear screen                    |
-| `alt + shift + s`         | Write screen to temp file       |
+Warp ships with native tabs, panes, and AI features — keybindings are managed
+inside Warp itself. Personal overrides live in `~/.warp/keybindings.yaml`
+(synced from `config/warp/keybindings.yaml`). The lazydocker launch
+configuration that powers `alt + d` lives in
+`~/.warp/launch_configurations/lazydocker.yaml`.
+
+Note: tmux is intentionally **not** auto-started inside Warp (fish guards on
+`$TERM_PROGRAM == WarpTerminal`) — Warp's shell integration and block model
+conflict with tmux. The tmux bindings below apply to any non-Warp terminal.
 
 ### tmux
 
@@ -114,7 +114,7 @@ tomyqb-dots/
 ├── Brewfile                 # dependencies (used by `brew bundle`)
 ├── config/                  # source of truth for all dotfiles
 │   ├── aerospace/
-│   ├── ghostty/
+│   ├── warp/
 │   ├── starship/
 │   ├── fish/
 │   ├── tmux/

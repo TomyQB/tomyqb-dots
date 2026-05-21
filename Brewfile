@@ -27,7 +27,7 @@ brew "node"
 brew "felixkratz/formulae/borders"
 
 # --- Casks ---
-cask "ghostty"
+cask "warp"
 cask "nikitabobko/tap/aerospace"
 cask "font-iosevka-term-nerd-font"
 cask "maccy"

@@ -114,11 +114,18 @@ install_configs() {
     rm -f "$HOME/.aerospace.toml"
   fi
 
-  # Ghostty
-  mkdir -p "$HOME/.config/ghostty/shaders"
-  backup_then_install "$CONFIG_DIR/ghostty/config" "$HOME/.config/ghostty/config"
-  backup_then_install "$CONFIG_DIR/ghostty/shaders/cursor_smear_gentleman.glsl" \
-                      "$HOME/.config/ghostty/shaders/cursor_smear_gentleman.glsl"
+  # Warp
+  mkdir -p "$HOME/.warp/launch_configurations" "$HOME/.warp/tab_configs"
+  backup_then_install "$CONFIG_DIR/warp/settings.toml"     "$HOME/.warp/settings.toml"
+  backup_then_install "$CONFIG_DIR/warp/keybindings.yaml"  "$HOME/.warp/keybindings.yaml"
+  for f in "$CONFIG_DIR/warp/launch_configurations/"*.yaml; do
+    [ -e "$f" ] || continue
+    backup_then_install "$f" "$HOME/.warp/launch_configurations/$(basename "$f")"
+  done
+  for f in "$CONFIG_DIR/warp/tab_configs/"*.toml; do
+    [ -e "$f" ] || continue
+    backup_then_install "$f" "$HOME/.warp/tab_configs/$(basename "$f")"
+  done
 
   # Starship
   backup_then_install "$CONFIG_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
@@ -211,7 +218,7 @@ verify_installation() {
   done
   # GUI casks live under /Applications and won't show on PATH.
   local apps=(
-    "Ghostty:/Applications/Ghostty.app"
+    "Warp:/Applications/Warp.app"
     "Maccy:/Applications/Maccy.app"
     "Google Chrome:/Applications/Google Chrome.app"
     "Visual Studio Code:/Applications/Visual Studio Code.app"
