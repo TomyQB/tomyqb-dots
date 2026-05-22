@@ -39,7 +39,6 @@ alt-w = 'close --quit-if-last-window'
 alt-f = 'exec-and-forget $HOME/.config/aerospace/open-at-cwd.sh finder'
 alt-q = 'exec-and-forget open -na Warp'
 alt-g = 'exec-and-forget $HOME/.config/aerospace/open-chrome.sh'
-alt-d = 'exec-and-forget $HOME/.config/aerospace/toggle-lazydocker.sh'
 
 # --- Focus window (alt+shift+hjkl horizontal, arrows vertical) ---
 # alt+arrows queda libre para que Warp navegue entre splits

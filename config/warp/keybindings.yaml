@@ -1,16 +1,19 @@
 ---
-"requested_command:edit": none
+Close Workflow: cmd-w
+"workspace:new_tab": alt-n
+"workspace:activate_prev_tab": alt-i
+"editor:edit_link": none
 "pane_group:add_right": alt-v
+"workspace:toggle_left_panel": alt-u
+"workspace:move_tab_right": alt-shift-K
+"workspace:toggle_project_explorer": alt-u
+"pane_group:add_down": alt-h
+"ai_assistant_panel:reset_context": none
+"workspace:close_panel": cmd-w
 "terminal:clear_blocks": none
 "workspace:activate_next_tab": alt-k
-"workspace:close_panel": cmd-w
-Close Workflow: cmd-w
-"workspace:toggle_left_panel": alt-u
-"workspace:activate_prev_tab": alt-i
-"ai_assistant_panel:reset_context": none
-"workspace:toggle_project_explorer": alt-u
 "code_diff_view:edit_requested_edit": none
+"workspace:move_tab_left": alt-shift-I
 "workspace:close_active_tab": alt-b
-"editor:edit_link": none
-"workspace:new_tab": alt-n
-"pane_group:add_down": alt-h
+"requested_command:edit": none
+"input:enable_auto_detection": none

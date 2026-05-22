@@ -57,16 +57,25 @@ It's idempotent — re-run it any time.
 | `alt + f`                 | Open Finder (floating) at terminal's CWD            |
 | `alt + q`                 | Open new Warp window                                |
 | `alt + g`                 | Open new Chrome window                              |
-| `alt + d`                 | Toggle lazydocker in workspace D (Warp launch cfg)  |
 | `alt + shift + ;`         | Enter service mode (esc=reload, r=reset, f=float)   |
 
 ### Warp (terminal)
 
 Warp ships with native tabs, panes, and AI features — keybindings are managed
 inside Warp itself. Personal overrides live in `~/.warp/keybindings.yaml`
-(synced from `config/warp/keybindings.yaml`). The lazydocker launch
-configuration that powers `alt + d` lives in
-`~/.warp/launch_configurations/lazydocker.yaml`.
+(synced from `config/warp/keybindings.yaml`).
+
+| Key                       | Action                                              |
+|---------------------------|-----------------------------------------------------|
+| `alt + n`                 | New tab                                             |
+| `alt + b`                 | Close active tab                                    |
+| `alt + i` / `alt + k`     | Previous / next tab                                 |
+| `alt + shift + i`         | Move tab up in the left sidebar                     |
+| `alt + shift + k`         | Move tab down in the left sidebar                   |
+| `alt + u`                 | Toggle left panel / project explorer                |
+| `alt + v`                 | Split pane right                                    |
+| `alt + h`                 | Split pane down                                     |
+| `cmd + w`                 | Close panel / workflow                              |
 
 Note: tmux is intentionally **not** auto-started inside Warp (fish guards on
 `$TERM_PROGRAM == WarpTerminal`) — Warp's shell integration and block model
