@@ -22,6 +22,7 @@ brew "lazygit"
 brew "lazydocker"
 brew "awscli"
 brew "node"
+brew "mprocs"
 
 # --- Window management ---
 brew "felixkratz/formulae/borders"

@@ -36,6 +36,7 @@ It's idempotent — re-run it any time.
 | borders    | Focused-window outline           | `~/.config/borders/bordersrc`         |
 | lazygit    | Git TUI                          | —                                     |
 | lazydocker | Docker TUI                       | —                                     |
+| mprocs     | Process multiplexer (TUI)        | (per-project, e.g. `mprocs.yaml`)     |
 
 ## Keybindings cheat sheet
 
