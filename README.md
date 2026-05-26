@@ -16,9 +16,10 @@ That's it. The installer:
 1. `brew bundle`s every package in `Brewfile`
 2. Backs up any existing configs to `~/.tomyqb-backup-<timestamp>/`
 3. Drops the dotfiles in place
-4. Bootstraps fisher (fish plugins) and tpm (tmux plugins)
-5. Sets fish as the default shell
-6. Starts `borders` and AeroSpace as background services
+4. Hides the macOS Dock (auto-hide with a long reveal delay)
+5. Bootstraps fisher (fish plugins) and tpm (tmux plugins)
+6. Sets fish as the default shell
+7. Starts `borders` and AeroSpace as background services
 
 It's idempotent — re-run it any time.
 

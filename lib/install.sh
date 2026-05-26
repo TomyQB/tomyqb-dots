@@ -150,6 +150,17 @@ install_configs() {
   fi
 }
 
+configure_dock() {
+  log "Configuring the macOS Dock to stay hidden..."
+  # autohide-delay 10s means the Dock effectively never reappears on hover,
+  # while still leaving a path back if you really push the cursor and wait.
+  defaults write com.apple.dock autohide -bool true
+  defaults write com.apple.dock autohide-delay -float 10
+  defaults write com.apple.dock autohide-time-modifier -float 0
+  killall Dock >/dev/null 2>&1 || warn "couldn't restart Dock — changes apply on next login"
+  ok "Dock set to auto-hide"
+}
+
 bootstrap_fish_plugins() {
   log "Bootstrapping fisher + fish plugins..."
   fish -c '
@@ -268,6 +279,7 @@ main() {
   install_brew_packages
   verify_installation || warn "Continuing despite missing tools — fix and re-run if needed."
   install_configs
+  configure_dock
   bootstrap_fish_plugins
   bootstrap_tmux_plugins
   bootstrap_playwright
