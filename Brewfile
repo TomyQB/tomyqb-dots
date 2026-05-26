@@ -13,7 +13,6 @@ brew "atuin"
 brew "carapace"
 brew "zoxide"
 brew "fzf"
-brew "tmux"
 
 # --- Dev tools ---
 brew "gh"

@@ -32,7 +32,7 @@ class TomyqbDots < Formula
         • brew bundle the Brewfile (fish, starship, warp, aerospace, borders, ...)
         • Back up any existing configs to ~/.tomyqb-backup-<timestamp>/
         • Drop the dotfiles in place
-        • Bootstrap fisher + tpm plugins
+        • Bootstrap fisher plugins
         • Set fish as your default shell
         • Start borders + AeroSpace
 

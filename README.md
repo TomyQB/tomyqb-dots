@@ -17,7 +17,7 @@ That's it. The installer:
 2. Backs up any existing configs to `~/.tomyqb-backup-<timestamp>/`
 3. Drops the dotfiles in place
 4. Hides the macOS Dock (auto-hide with a long reveal delay)
-5. Bootstraps fisher (fish plugins) and tpm (tmux plugins)
+5. Bootstraps fisher (fish plugins)
 6. Sets fish as the default shell
 7. Starts `borders` and AeroSpace as background services
 
@@ -31,7 +31,6 @@ It's idempotent — re-run it any time.
 | starship   | Prompt (Gentleman palette)       | `~/.config/starship.toml`             |
 | atuin      | Shell history                    | (initialised on first run)            |
 | carapace   | Completions bridge               | (autoinit from fish config)           |
-| tmux       | Terminal multiplexer + kanagawa  | `~/.tmux.conf`                        |
 | Warp       | Terminal emulator                | `~/.warp/`                            |
 | AeroSpace  | Tiling window manager            | `~/.config/aerospace/aerospace.toml`  |
 | borders    | Focused-window outline           | `~/.config/borders/bordersrc`         |
@@ -79,21 +78,6 @@ inside Warp itself. Personal overrides live in `~/.warp/keybindings.yaml`
 | `alt + h`                 | Split pane down                                     |
 | `cmd + w`                 | Close panel / workflow                              |
 
-Note: tmux is intentionally **not** auto-started inside Warp (fish guards on
-`$TERM_PROGRAM == WarpTerminal`) — Warp's shell integration and block model
-conflict with tmux. The tmux bindings below apply to any non-Warp terminal.
-
-### tmux
-
-Prefix: `ctrl + a` (not `ctrl + b`)
-
-| Key                       | Action                          |
-|---------------------------|---------------------------------|
-| `prefix + v`              | Split pane right                |
-| `prefix + d`              | Split pane down                 |
-| `alt + g`                 | Toggle floating scratch session |
-| `prefix + K`              | Kill all other sessions         |
-
 ## Updating
 
 ```bash
@@ -128,7 +112,6 @@ tomyqb-dots/
 │   ├── warp/
 │   ├── starship/
 │   ├── fish/
-│   ├── tmux/
 │   └── borders/
 └── Formula/tomyqb-dots.rb   # local copy; canonical lives in TomyQB/homebrew-tap
 ```

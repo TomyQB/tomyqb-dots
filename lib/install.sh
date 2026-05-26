@@ -134,9 +134,6 @@ install_configs() {
   backup_then_install "$CONFIG_DIR/fish/config.fish"  "$HOME/.config/fish/config.fish"
   backup_then_install "$CONFIG_DIR/fish/fish_plugins" "$HOME/.config/fish/fish_plugins"
 
-  # Tmux
-  backup_then_install "$CONFIG_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
-
   # Borders
   mkdir -p "$HOME/.config/borders"
   backup_then_install "$CONFIG_DIR/borders/bordersrc" "$HOME/.config/borders/bordersrc"
@@ -190,15 +187,6 @@ bootstrap_playwright() {
   fi
 }
 
-bootstrap_tmux_plugins() {
-  log "Bootstrapping tmux plugin manager (tpm) + plugins..."
-  if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-    git clone --quiet https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
-  fi
-  "$HOME/.tmux/plugins/tpm/bin/install_plugins" >/dev/null 2>&1 || warn "tpm install_plugins had issues"
-  ok "tmux plugins installed"
-}
-
 set_fish_default_shell() {
   local fish_path
   fish_path="$(command -v fish || true)"
@@ -220,7 +208,7 @@ set_fish_default_shell() {
 verify_installation() {
   log "Verifying required tools are available..."
   # CLI binaries we expect on PATH after `brew bundle`.
-  local cli_tools=(fish starship atuin tmux gh jq lazygit lazydocker fzf zoxide borders aerospace aws node npm)
+  local cli_tools=(fish starship atuin gh jq lazygit lazydocker fzf zoxide borders aerospace aws node npm)
   local missing=()
   local tool
   for tool in "${cli_tools[@]}"; do
@@ -280,7 +268,6 @@ main() {
   install_configs
   configure_dock
   bootstrap_fish_plugins
-  bootstrap_tmux_plugins
   bootstrap_playwright
   set_fish_default_shell
   start_services

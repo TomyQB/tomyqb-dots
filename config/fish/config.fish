@@ -38,16 +38,6 @@ if test $IS_TERMUX -eq 0; and set -q BREW_BIN; and test -f $BREW_BIN
     eval ($BREW_BIN shellenv)
 end
 
-# Start tmux/zellij — skip inside Warp (Warp has native tabs/panes and its
-# shell integration breaks if the real shell ends up inside tmux).
-if not set -q TMUX; and test "$TERM_PROGRAM" != WarpTerminal
-    tmux
-end
-
-#if not set -q ZELLIJ
-#    zellij
-#end
-
 # Initialize tools
 starship init fish | source
 zoxide init fish | source
