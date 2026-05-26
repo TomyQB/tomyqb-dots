@@ -94,7 +94,7 @@ ensure_brew() {
 
 install_brew_packages() {
   log "Installing packages from Brewfile..."
-  brew bundle --file="$BREWFILE" --no-lock
+  brew bundle --file="$BREWFILE"
   ok "Brew packages installed"
 }
 
@@ -106,7 +106,6 @@ install_configs() {
   backup_then_install "$CONFIG_DIR/aerospace/aerospace.toml"           "$HOME/.config/aerospace/aerospace.toml"
   backup_then_install "$CONFIG_DIR/aerospace/open-at-cwd.sh"           "$HOME/.config/aerospace/open-at-cwd.sh"
   backup_then_install "$CONFIG_DIR/aerospace/open-chrome.sh"           "$HOME/.config/aerospace/open-chrome.sh"
-  backup_then_install "$CONFIG_DIR/aerospace/toggle-lazydocker.sh"     "$HOME/.config/aerospace/toggle-lazydocker.sh"
   backup_then_install "$CONFIG_DIR/aerospace/focus-workspace-here.sh"  "$HOME/.config/aerospace/focus-workspace-here.sh"
   chmod +x "$HOME/.config/aerospace/"*.sh
   # Remove legacy single-file config so AeroSpace does not see two configs.
