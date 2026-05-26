@@ -252,7 +252,12 @@ Next steps:
        System Settings → Privacy & Security → Accessibility
   2. If 'code' CLI is missing (for \$EDITOR), open VSCode and run:
        Cmd+Shift+P → "Shell Command: Install 'code' command in PATH"
-  3. Open a new terminal — fish + starship + atuin will activate.
+  3. Log out and back in (or reboot) so fish becomes your active shell.
+     A new terminal/tab is NOT enough: macOS keeps the old \$SHELL until you
+     re-login, so Warp would keep launching zsh and tools like 'z' (zoxide)
+     would be missing.
+     Tip: in Warp, set Settings → Startup shell to /opt/homebrew/bin/fish;
+     it syncs across your machines.
 
 Backups (if any): $BACKUP_DIR
 EOF
