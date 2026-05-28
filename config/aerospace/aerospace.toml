@@ -47,11 +47,11 @@ alt-shift-down  = 'focus down'
 alt-shift-up    = 'focus up'
 alt-shift-l     = 'focus right'
 
-# --- Move window (alt+ctrl+arrows) ---
-alt-ctrl-left  = 'move left'
-alt-ctrl-down  = 'move down'
-alt-ctrl-up    = 'move up'
-alt-ctrl-right = 'move right'
+# --- Move window (alt+ctrl + j/l horizontal, i/k vertical) ---
+alt-ctrl-j = 'move left'
+alt-ctrl-l = 'move right'
+alt-ctrl-i = 'move up'
+alt-ctrl-k = 'move down'
 
 # --- Resize ---
 alt-minus  = 'resize smart -50'
