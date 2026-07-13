@@ -40,12 +40,13 @@ alt-f = 'exec-and-forget $HOME/.config/aerospace/open-at-cwd.sh finder'
 alt-q = 'exec-and-forget open -na Warp'
 alt-g = 'exec-and-forget $HOME/.config/aerospace/open-chrome.sh'
 
-# --- Focus window (alt+shift+hjkl horizontal, arrows vertical) ---
-# alt+arrows queda libre para que Warp navegue entre splits
+# --- Focus window (alt+shift+j,k,l,i — arrows también, para Warp usa alt+arrows sin shift) ---
 alt-shift-j     = 'focus left'
+alt-shift-k     = 'focus down'
+alt-shift-i     = 'focus up'
+alt-shift-l     = 'focus right'
 alt-shift-down  = 'focus down'
 alt-shift-up    = 'focus up'
-alt-shift-l     = 'focus right'
 
 # --- Move window (alt+ctrl + j/l horizontal, i/k vertical) ---
 alt-ctrl-j = 'move left'
@@ -94,12 +95,4 @@ f            = ['layout floating tiling', 'mode main']  # toggle floating
 backspace    = ['close-all-windows-but-current', 'mode main']
 
 # --- Per-app rules ---
-# Finder always floats so alt+f opens it as a floating window.
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
-
-# System Settings should also float (small dialogs).
-[[on-window-detected]]
-if.app-id = 'com.apple.systempreferences'
-run = 'layout floating'
+# (sin reglas de floating: Finder, Ajustes y demás se tilean como el resto)
