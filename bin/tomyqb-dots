@@ -3,7 +3,7 @@
 # Dispatches subcommands to lib/install.sh and friends.
 set -euo pipefail
 
-VERSION="0.2.16"
+VERSION="0.2.17"
 
 # Resolve repo root. When installed via Homebrew, this script lives in
 # <prefix>/bin and the libexec content lives at ../libexec/tomyqb-dots.
