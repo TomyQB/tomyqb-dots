@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Usage: open-at-cwd.sh <finder|vscode>
 # Opens the requested app at the CWD of the focused terminal window.
-# Resolves CWD via tmux (if the terminal runs tmux) or via lsof on a shell
+# Resolves CWD from Warp's SQLite (active tab) or via lsof on a shell
 # descendant. Falls back to $HOME if nothing can be resolved.
 set -u
 
@@ -14,7 +14,7 @@ app_name=$(aerospace list-windows --focused --format '%{app-name}' 2>/dev/null |
 
 is_terminal() {
   case "$1" in
-    Ghostty|kitty|Kitty|Terminal|iTerm2|iTerm|Alacritty|WezTerm|Warp|Hyper) return 0 ;;
+    kitty|Kitty|Terminal|iTerm2|iTerm|Alacritty|WezTerm|Warp|Hyper) return 0 ;;
     *) return 1 ;;
   esac
 }
@@ -30,7 +30,7 @@ collect_descendants() {
 }
 
 if [ -n "$app_pid" ] && is_terminal "$app_name"; then
-  # 0) Warp: no expone la tab activa por proceso (todos los shells son
+  # 1) Warp: no expone la tab activa por proceso (todos los shells son
   # hermanos), ni por AppleScript, ni por Accessibility. Pero su estado vive en
   # una SQLite: windows.active_tab_index apunta a la tab activa; cruzándola con
   # las tabs (ordenadas por id) y el terminal_pane de cada una se obtiene el
@@ -55,31 +55,6 @@ if [ -n "$app_pid" ] && is_terminal "$app_name"; then
   fi
 
   descendants=$(collect_descendants "$app_pid")
-
-  # 1) Prefer tmux: shells live under the tmux server (daemon), not under the
-  # terminal app, so walking descendants would miss them. Match the tmux
-  # client process (descendant of the terminal) and ask tmux — from THAT
-  # client's perspective — for the focused pane's CWD. Using `-c <client>`
-  # (instead of `-t <session>:`) is what makes #{pane_current_path} resolve
-  # to the pane the user is actually looking at: with multiple panes/splits,
-  # each tmux client has its own active pane.
-  if [ -z "$target" ] && command -v tmux >/dev/null 2>&1 && tmux info >/dev/null 2>&1; then
-    while read -r d; do
-      [ -z "$d" ] && continue
-      name=$(ps -o comm= -p "$d" 2>/dev/null | awk -F/ '{print $NF}')
-      if [ "$name" = "tmux" ]; then
-        client=$(tmux list-clients -F '#{client_pid} #{client_name}' 2>/dev/null \
-                 | awk -v p="$d" '$1==p{print $2; exit}')
-        if [ -n "$client" ]; then
-          path=$(tmux display-message -c "$client" -p '#{pane_current_path}' 2>/dev/null)
-          if [ -n "$path" ] && [ -d "$path" ]; then
-            target="$path"
-            break
-          fi
-        fi
-      fi
-    done <<< "$descendants"
-  fi
 
   # 2) Fallback: any shell descendant of the terminal app.
   if [ -z "$target" ]; then
