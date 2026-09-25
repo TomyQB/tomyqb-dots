@@ -7,6 +7,7 @@ Personal development environment for macOS. One command installs the shell stack
 ## Install on a new Mac
 
 ```bash
+brew tap TomyQB/tap && brew trust TomyQB/tap   # recent Homebrew requires trusting third-party taps
 brew install TomyQB/tap/tomyqb-dots
 tomyqb-dots install
 ```
