@@ -85,6 +85,12 @@ alt-shift-0 = 'exec-and-forget $HOME/.config/aerospace/focus-workspace-here.sh 1
 alt-tab       = 'focus-monitor --wrap-around next'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
+# --- Multi-monitor (alt+cmd = llevar el workspace a la pantalla de al lado) ---
+alt-cmd-j = 'move-workspace-to-monitor left'
+alt-cmd-k = 'move-workspace-to-monitor down'
+alt-cmd-i = 'move-workspace-to-monitor up'
+alt-cmd-l = 'move-workspace-to-monitor right'
+
 # --- Service mode (config reload, etc.) ---
 alt-shift-semicolon = 'mode service'
 

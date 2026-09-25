@@ -44,12 +44,13 @@ It's idempotent — re-run it any time.
 
 | Key                       | Action                                              |
 |---------------------------|-----------------------------------------------------|
-| `alt + shift + j/l`       | Focus window (left/right)                           |
-| `alt + shift + ↓/↑`       | Focus window (down/up)                              |
-| `alt + ctrl + ←/↓/↑/→`    | Move window                                         |
-| `alt + 1..0`              | Go to workspace 1..10                               |
-| `alt + shift + 1..0`      | Move window to workspace 1..10                      |
-| `alt + tab`               | Back-and-forth between last two workspaces          |
+| `alt + shift + j/k/i/l`   | Focus window (left/down/up/right, also `↓/↑`)       |
+| `alt + ctrl + j/k/i/l`    | Move window (left/down/up/right)                    |
+| `alt + 1..0`              | Go to workspace 1..10 (except 2)                    |
+| `alt + shift + 1..0`      | Move window to workspace 1..10 (except 2)           |
+| `alt + tab`               | Focus next monitor                                  |
+| `alt + shift + tab`       | Move workspace to next monitor                      |
+| `alt + cmd + j/k/i/l`     | Move workspace to monitor left/down/up/right        |
 | `alt + enter`             | Toggle accordion ↔ tiles layout                     |
 | `alt + slash`             | Toggle tiles orientation                            |
 | `alt + shift + m`         | Fullscreen current window                           |
@@ -58,7 +59,7 @@ It's idempotent — re-run it any time.
 | `alt + f`                 | Open Finder (floating) at terminal's CWD            |
 | `alt + q`                 | Open new Warp window                                |
 | `alt + g`                 | Open new Chrome window                              |
-| `alt + shift + ;`         | Enter service mode (esc=reload, r=reset, f=float)   |
+| `alt + shift + ;`         | Service mode (esc=reload, r=reset, f=float, ⌫=close others) |
 
 ### Warp (terminal)
 

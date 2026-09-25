@@ -94,6 +94,12 @@ ensure_brew() {
 
 install_brew_packages() {
   log "Installing packages from Brewfile..."
+  # Recent Homebrew refuses to load formulae from third-party taps until trusted.
+  if brew help trust >/dev/null 2>&1; then
+    brew tap felixkratz/formulae
+    brew tap nikitabobko/tap
+    brew trust felixkratz/formulae nikitabobko/tap
+  fi
   brew bundle --file="$BREWFILE"
   ok "Brew packages installed"
 }
