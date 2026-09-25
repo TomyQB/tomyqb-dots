@@ -7,15 +7,21 @@ theme = "phenomenon"
 [appearance.vertical_tabs]
 enabled = true
 display_granularity = "panes"
-view_mode = "compact"
+view_mode = "expanded"
 primary_info = "command"
 compact_subtitle = "working_directory"
 tab_item_mode = "focused_session"
-show_details_on_hover = true
+show_details_on_hover = false
+show_pr_link = true
+show_diff_stats = true
 
 [appearance.text]
 notebook_font_size = 14.0
-font_size = 13.0
+font_size = 14.0
+font_name = "Hack Nerd Font Mono"
+
+[appearance.window]
+zoom_level = 100
 
 [agents]
 cloud_conversation_storage_enabled = true
@@ -35,6 +41,45 @@ should_render_cli_agent_toolbar = true
 
 [agents.voice]
 voice_input_toggle_key = "fn"
+
+[agents.execution_profiles]
+
+[agents.execution_profiles.default]
+apply_code_diffs = "agent_decides"
+ask_user_question = "always_ask"
+autosync_plans_to_warp_drive = true
+command_allowlist = []
+command_denylist = [
+  'bash(\s.*)?',
+  'fish(\s.*)?',
+  'pwsh(\s.*)?',
+  'sh(\s.*)?',
+  'zsh(\s.*)?',
+  'curl(\s.*)?',
+  'eval(\s.*)?',
+  'exec(\s.*)?',
+  'source(\s.*)?',
+  'wget(\s.*)?',
+  'dig(\s.*)?',
+  'nslookup(\s.*)?',
+  'host(\s.*)?',
+  'ssh(\s.*)?',
+  'scp(\s.*)?',
+  'rsync(\s.*)?',
+  'telnet(\s.*)?',
+  'rm(\s.*)?',
+]
+computer_use = "never"
+directory_allowlist = []
+execute_commands = "always_ask"
+mcp_allowlist = []
+mcp_denylist = []
+mcp_permissions = "agent_decides"
+name = "Default"
+read_files = "agent_decides"
+run_agents = "always_ask"
+web_search_enabled = true
+write_to_pty = "always_ask"
 
 [privacy]
 telemetry_enabled = true
@@ -78,8 +123,8 @@ is_settings_sync_enabled = true
 
 [code.editor]
 show_code_review_button = false
-show_project_explorer = false
-show_global_search = false
+show_project_explorer = true
+show_global_search = true
 
 [general]
 default_session_mode = "terminal"
@@ -88,8 +133,17 @@ show_warning_before_quitting = false
 [notifications]
 toast_duration_secs = 8
 
+[notifications.preferences]
+is_agent_task_completed_enabled = true
+is_long_running_enabled = true
+is_needs_attention_enabled = true
+is_password_prompt_enabled = true
+long_running_threshold = 30
+mode = "dismissed"
+play_notification_sound = true
+
 [warp_drive]
-enabled = false
+enabled = true
 
 [terminal]
 osc52_clipboard_access = "write_only"

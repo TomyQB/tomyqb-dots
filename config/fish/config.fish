@@ -46,6 +46,24 @@ if command -v fzf &> /dev/null
 fzf --fish | source
 end
 
+# fnm (Node version manager) — auto-switch segun .nvmrc/.node-version al hacer cd
+if command -v fnm &> /dev/null
+    fnm env --use-on-cd --shell fish | source
+end
+
+# JAVA_HOME -> Amazon Corretto 21 (lo usa Maven / Spring Boot)
+if test -x /usr/libexec/java_home
+    set -l _java21 (/usr/libexec/java_home -v 21 2>/dev/null)
+    if test -n "$_java21"
+        set -gx JAVA_HOME $_java21
+    end
+end
+
+# libpq (cliente psql, keg-only) primero en el PATH
+if test -d /opt/homebrew/opt/libpq/bin
+    fish_add_path /opt/homebrew/opt/libpq/bin
+end
+
 set -x PATH $HOME/.cargo/bin $PATH
 
 # Carapace completions

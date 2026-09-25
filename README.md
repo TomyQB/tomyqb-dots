@@ -73,8 +73,8 @@ inside Warp itself. Personal overrides live in `~/.warp/keybindings.yaml`
 | `alt + n`                 | New tab                                             |
 | `alt + b`                 | Close active tab                                    |
 | `alt + i` / `alt + k`     | Previous / next tab                                 |
-| `alt + shift + i`         | Move tab up in the left sidebar                     |
-| `alt + shift + k`         | Move tab down in the left sidebar                   |
+| `ctrl + alt + shift + i`  | Move tab up in the left sidebar                     |
+| `ctrl + alt + shift + k`  | Move tab down in the left sidebar                   |
 | `alt + u`                 | Toggle left panel / project explorer                |
 | `alt + v`                 | Split pane right                                    |
 | `alt + h`                 | Split pane down                                     |
