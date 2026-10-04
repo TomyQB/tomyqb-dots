@@ -60,7 +60,7 @@ It's idempotent — re-run it any time.
 | `alt + f`                 | Open Finder (floating) at terminal's CWD            |
 | `alt + q`                 | Open new Warp window                                |
 | `alt + g`                 | Open new Chrome window                              |
-| `alt + shift + ;`         | Service mode (esc=reload, r=reset, f=float, ⌫=close others) |
+| `alt + ctrl + shift + ;`  | Service mode (`;` = `ñ` on ES keyboards; esc=reload, r=reset, f=float, ⌫=close others) |
 
 ### Warp (terminal)
 

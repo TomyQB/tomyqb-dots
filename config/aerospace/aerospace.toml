@@ -91,8 +91,8 @@ alt-cmd-k = 'move-workspace-to-monitor down'
 alt-cmd-i = 'move-workspace-to-monitor up'
 alt-cmd-l = 'move-workspace-to-monitor right'
 
-# --- Service mode (config reload, etc.) ---
-alt-shift-semicolon = 'mode service'
+# --- Service mode (config reload, etc.) — semicolon = tecla ñ en teclado ES ---
+alt-ctrl-shift-semicolon = 'mode service'
 
 [mode.service.binding]
 esc          = ['reload-config', 'mode main']
