@@ -1,8 +1,8 @@
 class TomyqbDots < Formula
   desc "Personal dotfiles installer for TomyQB development environment"
   homepage "https://github.com/TomyQB/tomyqb-dots"
-  url "https://github.com/TomyQB/tomyqb-dots/archive/refs/tags/v0.2.20.tar.gz"
-  sha256 "f307d49754cf56946967be2c710f2c5eee7942c806583247af64bc3131e15c9c"
+  url "https://github.com/TomyQB/tomyqb-dots/archive/refs/tags/v0.2.21.tar.gz"
+  sha256 "d28c61bc47b841d8f67b281431d785ad52cb571e9fe1495e32ac9745f1249805"
   license "MIT"
   head "https://github.com/TomyQB/tomyqb-dots.git", branch: "main"
 
