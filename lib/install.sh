@@ -163,6 +163,18 @@ configure_dock() {
   ok "Dock set to auto-hide"
 }
 
+configure_chrome() {
+  log "Configuring Chrome tab shortcuts (Option+J / Option+L)..."
+  # Menu titles depend on Chrome's UI language, so bind both Spanish and English.
+  # "~" is Option in NSUserKeyEquivalents. Applies on Chrome's next launch.
+  defaults write com.google.Chrome NSUserKeyEquivalents -dict-add \
+    "Seleccionar siguiente pestaña" "~l" \
+    "Seleccionar pestaña anterior" "~j" \
+    "Select Next Tab" "~l" \
+    "Select Previous Tab" "~j"
+  ok "Chrome tab shortcuts set (restart Chrome to apply)"
+}
+
 bootstrap_fish_plugins() {
   log "Bootstrapping fisher + fish plugins..."
   fish -c '
@@ -278,6 +290,7 @@ main() {
   verify_installation || warn "Continuing despite missing tools — fix and re-run if needed."
   install_configs
   configure_dock
+  configure_chrome
   bootstrap_fish_plugins
   bootstrap_playwright
   set_fish_default_shell

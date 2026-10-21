@@ -18,9 +18,10 @@ That's it. The installer:
 2. Backs up any existing configs to `~/.tomyqb-backup-<timestamp>/`
 3. Drops the dotfiles in place
 4. Hides the macOS Dock (auto-hide with a long reveal delay)
-5. Bootstraps fisher (fish plugins)
-6. Sets fish as the default shell
-7. Starts `borders` and AeroSpace as background services
+5. Binds Chrome's next/previous tab to `⌥L` / `⌥J` (applies on Chrome's next launch)
+6. Bootstraps fisher (fish plugins)
+7. Sets fish as the default shell
+8. Starts `borders` and AeroSpace as background services
 
 It's idempotent — re-run it any time.
 
